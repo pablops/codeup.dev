@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+<script>
+// ignore these lines for now
+// just know that the variable 'color' will end up with a random value from the colors array
+
+
+var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+
+
+
+var color = colors[Math.floor(Math.random()*colors.length)];
+
+switch (color) {
+
+	case "red":
+		console.log("my car is red");
+		break;
+	case "orange":
+		console.log("oranges are orange");
+		break;
+	case "yellow":
+		console.log("the sun is yellow");
+		break;
+	case "blue":
+		console.log("blue is the color of the sky");
+		break;
+	default:
+		console.log("wait what?")
+		break;
+
+}
+	
+
+
+
+console.log("the color was " + color);
+
+</script>
+</body>
+</html>
