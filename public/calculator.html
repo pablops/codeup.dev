@@ -1,0 +1,176 @@
+<html>
+<head>
+	<title>CALCULATORRRR!</title>
+
+<style>
+	.first {
+		color: blue;
+		background-color: red;
+	}
+	.second {
+		color: red;
+		background-color: blue;
+	}
+	#firstbox {
+		width: 40px;
+	}
+	#secondbox {
+		width: 15px;
+	}
+	#thirdbox {
+		width: 40px;
+	}
+	#firstrow {
+		padding-top: 5px;
+	}
+
+	#finalbox {
+		padding-top: 5px;
+		width: 100px;
+	}
+
+</style>
+</head>
+<body>
+
+<h1>THECALCULATORRRRRR!!!!</h1>
+
+<div id="allboxes">
+	<div id="boxes">
+		<input type="text" name="firstbox" id="firstbox">
+		<input type="text" name="secondbox" id="secondbox">
+		<input type="text" name="thirdbox" id="thirdbox"> 
+	</div>
+
+	<div id='firstrow'>
+		<button class='first' id='btn1' value="1">1</button>
+		<button class='first' id='btn2' value="2">2</button>
+		<button class='first' id='btn3' value="3">3</button>
+		<button class='first' id='btnadd' value="+">+</button>
+	</div>
+	<div id='secondrow'>
+		<button class='second' id='btn4' value="4">4</button>
+		<button class='second' id='btn5' value="5">5</button>
+		<button class='second' id='btn6' value="6">6</button>
+		<button class='second' id='btnminus' value="-">-</button>
+	</div>
+	<div id='thirdrow'>
+		<button class='first' id='btn7' value="7">7</button>
+		<button class='first' id='btn8' value="8">8</button>
+		<button class='first' id='btn9' value="9">9</button>
+		<button class='first' id='btntimes' value="*">*</button>
+	</div>
+	<div id='fourthrow'>
+		<button class='second' id='btnNothing'>C</button>
+		<button class='second' id='btn0' value="0">0</button>
+		<button class='second' id='btnequals' value="=">=</button>
+		<button class='second' id='btndivides' value="/">/</button>
+
+		<div id="lastbox">
+		<input type="text" name="finalbox" id="finalbox" readonly>
+		</div>
+	</div>
+</div>
+
+<script>
+	var inputInput = "";
+	var secondInput = "";
+	var operInput = "";
+	var totalTotal = 0;
+
+	var input1 = function(event) {
+		// WHY THIS.VALUE?? ISN'T "THIS" INPUT1?
+		if (operInput !== "") {
+				secondInput = secondInput + this.value;
+				document.getElementById('thirdbox').placeholder = secondInput;
+			} else {
+				inputInput = inputInput + this.value;
+	    		document.getElementById('firstbox').placeholder = inputInput;
+	    		console.log(inputInput);
+	    	}
+	    }
+
+	var inputOperator = function(event) {
+			operInput = this.value;
+			document.getElementById('secondbox').placeholder = operInput;
+			console.log = 'operator'
+		}
+
+
+	var input3 = function() {
+			if (document.getElementById('firstbox').placeholder !== "0") {
+			secondInput = secondInput + parseInt(document.getElementById('btn3').value);
+			document.getElementById('thirdbox').placeholder = secondInput;
+				}
+			}
+
+	var equals = function(event) {
+		if(document.getElementById('secondbox').placeholder === "+"){
+			totalTotal = parseInt(inputInput) + parseInt(secondInput);
+			document.getElementById('finalbox').placeholder = totalTotal;
+		}
+		else if(document.getElementById('secondbox').placeholder === "*"){
+			totalTotal = parseInt(inputInput) * parseInt(secondInput);
+			document.getElementById('finalbox').placeholder = totalTotal;	
+		}
+		else if(document.getElementById('secondbox').placeholder === "-"){
+			totalTotal = parseInt(inputInput) - parseInt(secondInput);
+			document.getElementById('finalbox').placeholder = totalTotal;
+		}
+	}
+
+	var nothing = function(event) {
+		inputInput = "";
+	    secondInput = "";
+	    operInput = "";
+	    totalTotal = 0;
+	    document.getElementById('firstbox').placeholder = inputInput;
+	    document.getElementById('secondbox').placeholder = operInput;
+	    document.getElementById('thirdbox').placeholder = secondInput;
+	    document.getElementById('finalbox').placeholder = totalTotal;
+
+
+
+	}
+
+	var btn1 = document.getElementById('btn1');
+	    btn1.addEventListener('click', input1, false);
+	var btn2 = document.getElementById('btn2');
+		btn2.addEventListener('click', input1, false);
+	var btn3 = document.getElementById('btn3');
+		btn3.addEventListener('click', input1, false);
+	var btn4 = document.getElementById('btn4');
+	    btn4.addEventListener('click', input1, false);
+	var btn5 = document.getElementById('btn5');
+		btn5.addEventListener('click', input1, false);
+	var btn6 = document.getElementById('btn6');
+		btn6.addEventListener('click', input1, false);
+	var btn7 = document.getElementById('btn7');
+	    btn7.addEventListener('click', input1, false);
+	var btn8 = document.getElementById('btn8');
+		btn8.addEventListener('click', input1, false);
+	var btn9 = document.getElementById('btn9');
+		btn9.addEventListener('click', input1, false);
+	var btn0 = document.getElementById('btn0');
+	    btn0.addEventListener('click', input1, false);
+	var btnadd = document.getElementById('btnadd');
+		btnadd.addEventListener('click', inputOperator, false);
+	var btnequals = document.getElementById('btnequals');
+		btnequals.addEventListener('click', equals, false);
+	var btntimes = document.getElementById('btntimes');
+		btntimes.addEventListener('click', inputOperator, false);
+	var btndivides = document.getElementById('btndivides');
+		btndivides.addEventListener('click', inputOperator, false);
+	var btnminus = document.getElementById('btnminus');
+		btnminus.addEventListener('click', inputOperator, false);
+	var btnNothing = document.getElementById('btnNothing');
+		btnNothing.addEventListener('click', nothing, false);
+
+
+
+</script>
+
+
+
+</body>
+</html>

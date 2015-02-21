@@ -1,0 +1,123 @@
+<html>
+<head>
+	<title>CALCULATORRRR!</title>
+
+<style>
+	.first {
+		color: blue;
+		background-color: red;
+	}
+	.second {
+		color: red;
+		background-color: blue;
+	}
+	#firstbox {
+		width: 40px;
+	}
+	#secondbox {
+		width: 15px;
+	}
+	#thirdbox {
+		width: 40px;
+	}
+	#firstrow {
+		padding-top: 5px;
+	}
+
+	#finalbox {
+		padding-top: 5px;
+		width: 100px;
+	}
+
+</style>
+</head>
+<body>
+
+<h1>THECALCULATORRRRRR!!!!</h1>
+
+<div id="allboxes">
+	<div id="boxes">
+		<input type="text" name="firstbox" id="firstbox">
+		<input type="text" name="secondbox" id="secondbox">
+		<input type="text" name="thirdbox" id="thirdbox"> 
+	</div>
+
+	<div id='firstrow'>
+		<button class='first' class='btn1' value="1">1</button>
+		<button class='first' id='btn2' value="2">2</button>
+		<button class='first' id='btn3' value="3">3</button>
+		<button class='first' id='btnOper' value="+">+</button>
+	</div>
+	<div id='secondrow'>
+		<button class='second' id='btn4' value="4">4</button>
+		<button class='second' class='btn1' value="5">5</button>
+		<button class='second' id='btn6' value="6">6</button>
+		<button class='second' id='btnminus'>-</button>
+	</div>
+	<div id='thirdrow'>
+		<button class='first' id='btn7' value="7">7</button>
+		<button class='first' id='btn8' value="8">8</button>
+		<button class='first' id='btn9' value="9">9</button>
+		<button class='first' id='btntimes'>*</button>
+	</div>
+	<div id='fourthrow'>
+		<button class='second' id='btnC'>C</button>
+		<button class='second' id='btn0' value="0">0</button>
+		<button class='second' id='btnequals'>=</button>
+		<button class='second' id='btndivides'>/</button>
+
+		<div id="lastbox">
+		<input type="text" name="finalbox" id="finalbox">
+		</div>
+	</div>
+</div>
+
+<script>
+	var inputInput = 0;
+	var secondInput = 0;
+	var operInput = 0;
+
+	var input1 = function() {
+			inputInput = inputInput + parseInt(document.getElementById('btn1').value);
+	    	console.log(document.getElementById('btn1').value);
+	    	document.getElementById('firstbox').placeholder = inputInput;
+	    }
+
+	var inputOperator = function() {
+			operInput = document.getElementById('btnOper').value;
+			document.getElementById('secondbox').placeholder = operInput;
+			console.log = 'klasjdflkajsd'
+		}
+
+	var input2 = function() {
+			if (document.getElementById('firstbox').placeholder !== "0") {
+				secondInput = secondInput + parseInt(document.getElementById('btn2').value);
+				//  console.log(document.getElementById('btn2').value)
+				document.getElementById('thirdbox').placeholder = secondInput;
+			}
+		}
+
+	
+
+	var addin = function() {
+			var totalTotal = inputInput + secondInput;
+			// console.log("vvvvvvv");
+			document.getElementById('finalbox').placeholder = totalTotal;
+		}
+
+	var btn1 = document.getElementsByClass('btn1');
+	    btn1.addEventListener('click', input1, false);
+	var btn2 = document.getElementById('btn2');
+		btn2.addEventListener('click', input2, false);
+	var btnOper = document.getElementById('btnOper');
+		btnOper.addEventListener('click', inputOperator, false);
+	var btnequals = document.getElementById('btnequals');
+		btnequals.addEventListener('click', addin, false);
+
+
+</script>
+
+
+
+</body>
+</html>

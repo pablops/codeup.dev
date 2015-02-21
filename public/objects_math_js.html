@@ -1,0 +1,90 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script>
+
+// create a circle object
+var circle = {
+    radius: 3,
+    getArea: function () {
+        return Math.PI * Math.pow(circle.radius, 2);
+    },
+
+    logInfo: function (round) {
+        // todo: complete this method. if round is true, round the result to the nearest integer.
+        if (round) {
+        	// var area = Math.round(this.getArea())
+        	// then you console.log + area
+        	console.log('Area of a circle with radius: ' + this.radius + ', is: ' + this.getArea ())
+        } else {
+        	console.log('Area of a circle with radius: ' + this.radius + ', is: ' + Math.round(this.getArea ()));
+        	// var area = this.getArea();
+        	// then you console.log + area
+        }
+
+    }
+};
+
+
+
+// log info about the circle
+circle.logInfo(false);
+circle.logInfo(true);
+
+// todo:
+// Change the radius of the circle to 5.
+circle.radius = 5;
+
+// log info about the circle
+circle.logInfo(false);
+circle.logInfo(true);
+
+var trapezoid = {
+	topLength: 5,
+	bottomLength: 3,
+	height: 10,
+	getArea: function () {
+		return (trapezoid.topLength + trapezoid.bottomLength) * trapezoid.height / 2;
+	},
+
+	logInfo: function() {
+		console.log('The area is ' + this.getArea ());
+	}
+
+
+};
+
+trapezoid.logInfo();
+
+trapezoid.bottomLength = 29;
+
+trapezoid.logInfo();
+
+var paragram = {
+	base: 20,
+	height: 13.6,
+	getArea: function() {
+		return (paragram.base * paragram.height * Math.sin(Math.PI * 70 / 180));
+	},
+
+	logInfo: function() {
+		console.log('The area is ' + paragram.getArea ())
+	}
+
+};
+
+paragram.logInfo();
+
+
+
+</script>
+
+</body>
+</html>
+
+<!-- getArea: function () {
+	return Math.PI * Math.pow(circle.radius, 2);
+} -->
