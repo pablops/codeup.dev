@@ -1,75 +1,104 @@
 <html>
 <head>
-	<title>CALCULATORRRR!</title>
-
+	<title>CALCULATOR!</title>
 <style>
 	.first {
 		color: blue;
 		background-color: red;
+		padding: 5px 10px;
+		color: #fff;
+	}
+	.first:hover {
+		background-color: #fff;
+		color: red;
+	}
+	.second:hover {
+		background-color: #fff;
+		color: blue;
 	}
 	.second {
 		color: red;
 		background-color: blue;
+		padding: 5px 10px;
+		color: #fff;
 	}
 	#firstbox {
-		width: 40px;
+		width: 60px;
 	}
 	#secondbox {
-		width: 15px;
+		width: 30px;
 	}
 	#thirdbox {
-		width: 40px;
+		width: 65px;
 	}
 	#firstrow {
 		padding-top: 5px;
+		padding-bottom: 5px;
 	}
-
-	#finalbox {
+	#secondrow {
 		padding-top: 5px;
-		width: 100px;
+		padding-bottom: 5px;
+	}
+	#thirdrow {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	#fourthrow {
+		padding-top: 5px;
+		padding-bottom: 10px;
+	}
+	#finalbox {
+		padding-top: 15px; 
+		width: 160px;
+	}
+	#btnequals {
+		width: 95px;
+	}
+	#btnpm {
+		width: 27px;
 	}
 
 </style>
 </head>
 <body>
 
-<h1>THECALCULATORRRRRR!!!!</h1>
+<h1>#THECALCULATOR!!!!</h1>
 
 <div id="allboxes">
 	<div id="boxes">
-		<input type="text" name="firstbox" id="firstbox">
-		<input type="text" name="secondbox" id="secondbox">
-		<input type="text" name="thirdbox" id="thirdbox"> 
+		<input type="text" name="firstbox" id="firstbox" readonly>
+		<input type="text" name="secondbox" id="secondbox" readonly>
+		<input type="text" name="thirdbox" id="thirdbox" readonly> 
 	</div>
-
 	<div id='firstrow'>
 		<button class='first' id='btn1' value="1">1</button>
 		<button class='first' id='btn2' value="2">2</button>
 		<button class='first' id='btn3' value="3">3</button>
 		<button class='first' id='btnadd' value="+">+</button>
-	</div>
+		<button class='first' id='btndot' value=".">.</button>
+ 	</div>
 	<div id='secondrow'>
 		<button class='second' id='btn4' value="4">4</button>
 		<button class='second' id='btn5' value="5">5</button>
 		<button class='second' id='btn6' value="6">6</button>
 		<button class='second' id='btnminus' value="-">-</button>
+		<button class='second' id='btnNothing'>c</button>
 	</div>
 	<div id='thirdrow'>
 		<button class='first' id='btn7' value="7">7</button>
 		<button class='first' id='btn8' value="8">8</button>
 		<button class='first' id='btn9' value="9">9</button>
 		<button class='first' id='btntimes' value="*">*</button>
+		<button class='first' id='btndivides' value="/">/</button>
 	</div>
 	<div id='fourthrow'>
-		<button class='second' id='btnNothing'>C</button>
 		<button class='second' id='btn0' value="0">0</button>
 		<button class='second' id='btnequals' value="=">=</button>
-		<button class='second' id='btndivides' value="/">/</button>
-
+		<button class='second' id='btnpm' value="+-">+-</button>
 		<div id="lastbox">
-		<input type="text" name="finalbox" id="finalbox" readonly>
 		</div>
 	</div>
+	<input type="text" name="finalbox" id="finalbox" readonly>
 </div>
 
 <script>
@@ -86,39 +115,51 @@
 			} else {
 				inputInput = inputInput + this.value;
 	    		document.getElementById('firstbox').placeholder = inputInput;
-	    		console.log(inputInput);
+	    		// console.log("what what");
 	    	}
 	    }
-
 	var inputOperator = function(event) {
 			operInput = this.value;
 			document.getElementById('secondbox').placeholder = operInput;
 			console.log = 'operator'
 		}
-
-
 	var input3 = function() {
 			if (document.getElementById('firstbox').placeholder !== "0") {
-			secondInput = secondInput + parseInt(document.getElementById('btn3').value);
-			document.getElementById('thirdbox').placeholder = secondInput;
+				secondInput = secondInput + parseInt(document.getElementById('btn3').value);
+				document.getElementById('thirdbox').placeholder = secondInput;
 				}
 			}
-
+	var dotter = function(event){
+			if (document.getElementById('thirdbox').placeholder === "") {
+				// console.log('button linked');
+				inputInput = inputInput + ".";
+				console.log(inputInput);
+				document.getElementById('firstbox').placeholder = inputInput;
+			}
+			else {
+				secondInput = secondInput + ".";
+				// console.log('botn linked');
+				document.getElementById('thirdbox').placeholder = secondInput;
+			}				
+		}
 	var equals = function(event) {
 		if(document.getElementById('secondbox').placeholder === "+"){
-			totalTotal = parseInt(inputInput) + parseInt(secondInput);
+			totalTotal = parseFloat(inputInput) + parseFloat(secondInput);
 			document.getElementById('finalbox').placeholder = totalTotal;
 		}
 		else if(document.getElementById('secondbox').placeholder === "*"){
-			totalTotal = parseInt(inputInput) * parseInt(secondInput);
+			totalTotal = parseFloat(inputInput) * parseFloat(secondInput);
 			document.getElementById('finalbox').placeholder = totalTotal;	
 		}
 		else if(document.getElementById('secondbox').placeholder === "-"){
-			totalTotal = parseInt(inputInput) - parseInt(secondInput);
+			totalTotal = parseFloat(inputInput) - parseFloat(secondInput);
+			document.getElementById('finalbox').placeholder = totalTotal;
+		}
+		else if(document.getElementById('secondbox').placeholder === "/"){
+			totalTotal = parseFloat(inputInput) / parseFloat(secondInput);
 			document.getElementById('finalbox').placeholder = totalTotal;
 		}
 	}
-
 	var nothing = function(event) {
 		inputInput = "";
 	    secondInput = "";
@@ -128,9 +169,29 @@
 	    document.getElementById('secondbox').placeholder = operInput;
 	    document.getElementById('thirdbox').placeholder = secondInput;
 	    document.getElementById('finalbox').placeholder = totalTotal;
+	}
+	var plusminus = function(event) {
+		if (document.getElementById('thirdbox').placeholder === "") {
+			// console.log('plusminus linked');
+			if(inputInput > 0){
+				inputInput = inputInput - (2 * inputInput);
+				document.getElementById('firstbox').placeholder = inputInput;
+			}
+			else if(inputInput < 0){
+				inputInput = Math.abs(inputInput);
+				document.getElementById('firstbox').placeholder = inputInput;
+			}
+		}
+		else if (document.getElementById('thirdbox').placeholder > 0){
+			secondInput = secondInput - (2 * secondInput);
+			document.getElementById('thirdbox').placeholder = secondInput;
+		}
+		else if (document.getElementById('thirdbox').placeholder < 0){
+			secondInput = Math.abs(secondInput);
+			document.getElementById('thirdbox').placeholder = secondInput;
 
-
-
+		}
+		// if (document.getElementById('thirdbox').
 	}
 
 	var btn1 = document.getElementById('btn1');
@@ -165,12 +226,11 @@
 		btnminus.addEventListener('click', inputOperator, false);
 	var btnNothing = document.getElementById('btnNothing');
 		btnNothing.addEventListener('click', nothing, false);
-
-
+	var btndot = document.getElementById('btndot');
+		btndot.addEventListener('click', dotter, false);
+	var btnpm = document.getElementById('btnpm');
+		btnpm.addEventListener('click', plusminus, false);
 
 </script>
-
-
-
 </body>
 </html>
