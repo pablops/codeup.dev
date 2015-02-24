@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+      #map-canvas {
+      width: 240px;
+      height: 320px;
+  	  }
+    </style>
+    
+  </head>
+
+  <body>
+	
+	<div id="map-canvas"></div>
+
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE"></script>
+    <script type="text/javascript">
+	    var mapOptions = {
+          zoom: 11,
+          center: { lat: 33.6143110, lng: -84.5002900},
+          mapTypeId: google.maps.MapTypeId.HYBRID
+        };
+
+        var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+        var chik = { lat: 33.6143110, lng: -84.5002900 };
+      
+      	var marker = new google.maps.Marker({
+      	position: chik,
+      	map: map
+    	});
+
+    	var infowindow = new google.maps.InfoWindow({
+    	content: 'Chik fil A, one sandwich at a time.'
+		});
+
+		// Open the window using our map and marker
+		infowindow.open(map,marker);
+    </script>
+  </body>
+</html>
