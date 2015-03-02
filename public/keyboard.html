@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>Enter Your Name</title>
+</head>
+<body>
+<h1 id="myName"></h1>
+
+<script>
+
+var count = 0;
+// var myName = 'pablo';
+
+answerArray = [112, 97, 98, 108, 111];
+
+$(document).keypress(function () {
+    var key = event.keyCode;
+    if(key === answerArray[count]){
+	  	console.log('final!');
+	  	count++;
+	  	// if check count to length then i am done alert
+	  	if(count === 5){
+	  		alert('now');
+	  		$("#myName").html("Pablo");
+	  	}
+	} else {
+		console.log('you lose');
+		count = 0;
+	}
+});
+
+
+
+
+</script>
+
+
+</body>
+</html>

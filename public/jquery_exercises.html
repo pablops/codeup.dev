@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title>JQUERY X</title>
+	<script src="/js/jquery.js"></script>
+</head>
+<body>
+	<h1 id="codeup">Hello Codeup</h1>
+	<h2 id="texter"> 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incid</h2>
+	<p id="texter2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do <span class='item'> eiusmod tempor incididunt</span> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	<ul id="lister">
+		<li class="item">Item One</li>
+		<li class="item">Item Two</li>
+		<li class="item">Three</li>
+	</ul>	
+<script>
+	$('h1').click(function() {
+        $('h1').css('background', 'green');
+    });
+	// $(document).ready(function() {
+ //    	$('#texter2').html('TESTING');
+	// });
+	// $('#codeup').html('More and More Testing');
+	// $('.item, h1').css('border-style', 'solid').css('border-width', '3px').css('border-color', 'red');
+	// $('body').css('background', 'green');
+	// $('p').css('color', 'white').css('font-family', 'Georgia');
+	// $('h2').css('color', 'yellow').css('font-family', 'Arial');
+	// Add jQuery code that will change the background color of a h1 element when clicked.
+    // Make all paragraphs have a font size of 18px when they are double clicked.
+  	 $('p').dblclick(function() {
+        $('p').css('font-size', '18px');
+    });
+    // Set all li text color to red when the mouse is hovering, reset to white when it is not.
+
+    $('.item').hover(
+        function() {
+    // you have to plug in '''this''' and not the name of the       // '''this'''or else it selects all.
+            $(this).css('background-color', '#FF0');
+        },
+        function() {
+            $(this).css('background-color', '');
+        }
+    );
+
+</script>
+</body>
+</html>

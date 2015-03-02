@@ -1,0 +1,92 @@
+<html>
+<head>
+	<script src="/js/jquery.js"></script>
+	<title>TURKEY RUN NATL PARK</title>
+</head>
+<body>
+<style>
+	.invisible{
+		display: none;
+	}
+	body{
+		background-color: green;
+	}
+</style>
+
+
+<dl>
+	<dt>When was it purchased, yo?</dt>
+		<dd class="theClass invisible">The first parcel of Turkey Run State Park's 2,382 acres was purchased during Indiana's centennial in 1916 when the State Park system was first established.</dd>
+	<dt>Is it Indiana's first state park?</dt>
+		<dd class="theClass invisible">Turkey Run is Indiana's second state park.</dd>
+	<dt>Where does that weird name come from, bro?</dt>
+		<dd class="theClass invisible">There are many legends about how Turkey Run got its name. One story says that wild turkeys, finding it warmer in the canyon bottoms, or "runs", would often huddle in these runs to avoid the cold. Pioneer hunters would herd the turkeys through these natural funnels into a central location for an easy harvest.</dd>
+	<dt>What did those early pioneers leave behind?</dt>
+		<dd class="theClass invisible">The early pioneers have left traces of their heritage. </dd>
+	<dt>What color is it?</dt>
+		<dd class="theClass invisible">Mostly green and some brown. The water, for the most part, is blue.</dd>
+	<dt>How much does it cost?</dt>
+		<dd class="theClass invisible">It's affordable, man. Trust me.</dd>
+
+	<h3>Badlands Park</h3>
+	<ul>
+		<li>lorem</li>
+		<li>ipsum</li>
+		<li>& stuff</li>
+		<li>more stuff</li>
+	</ul>
+	<h3>Thisother Park</h3>
+	<ul>
+		<li>lorem</li>
+		<li>ipsum</li>
+		<li>& stuff</li>
+		<li>more stuff</li>
+	</ul>
+	<h3>Park the Third</h3>
+	<ul>
+		<li>lorem</li>
+		<li>ipsum</li>
+		<li>& stuff</li>
+		<li>more stuff</li>
+	</ul>
+</dl>
+	<a href="#" id="showAnswers">Show me the answers!!!.</a>
+
+<!-- Under the FAQ, add 3 unordered lists like above. Each list should contain a national park name in an h3 element, and a ul of 4 facts about the park. -->
+
+<script>
+$(document).keydown(function () {
+	console.log('done loading, bro');
+});
+
+$('li').each(function(index) {
+	if(index % 4 == 0){
+    	$(this).css('font-weight', 'bold');
+    }
+});
+
+// $('li').click(function(event) {
+// 	$(this).parent().hide();
+// 	console.log('clicked');
+// });
+
+$('dt').click(function(event) {
+	var nextOne = $(this).next();
+	console.log(nextOne);
+	nextOne.fadeToggle();
+});
+
+$('#showAnswers').click(function(event) {
+    	event.preventDefault();
+    	$('.theClass').fadeToggle();
+    	console.log('clicked');
+});
+
+
+
+// $('.important').toggleClass('highlighted');
+
+</script>
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>CONTRA</title>
+	<script src="/js/jquery.js"></script>
+</head>
+<body>
+<h1 id="lives">up, up,<br> down, down,<br> left, right,<br> left, right,<br> b, a</h1>
+<style>
+	body{
+		background-color: black;
+	}
+	h1{
+		font-family: 'helvetica';
+		color: white;
+	}
+</style>
+
+<script>
+
+var count = 0;
+// var myName = 'pablo';
+
+answerArray = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+
+// Up, Up, Down, Down, Left, Right, Left, Right, B, A
+
+$(document).keydown(function () {
+	console.log(event.keyCode);
+    var key = event.keyCode;
+    if(key === answerArray[count]){
+	  	console.log('final!');
+	  	count++;
+	  	// if check count to length then i am done alert
+	  	if(count === 10){
+	  		alert('30 XTRA LIVES!');
+	  		// $("#lives").html("30 XTRA LIVES!");
+	  	}
+	} else {
+		console.log('you lose');
+		count = 0;
+	}
+});
+
+
+</script>
+
+
+</body>
+</html>
