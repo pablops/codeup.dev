@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Blog</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/cleanBlogBootstrap.css"></style>
+</head>
+
+<body>
+
+<h1>My Blog</h1>
+<button id='refresh'>refresh</button>
+<div id="posts">
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script>
+(function() {
+    function loadData(){
+        // TODO: Create an ajax GET request for /data/inventory.json
+        var toolInventory = $.ajax("/data/blog.json")
+            toolInventory.done(function(data) {
+            console.log("ajax call complete.");
+            console.log(data[3]);
+            var tableInsert = $('#posts');
+            var htmlString = '';
+
+            // start
+            for(var i = 0; i < data.length; i++){
+                // for(var j = 0; j < data[i]; j++){
+                var title = data[i].title;
+                var date = data[i].date;
+                var price = data[i].content;
+                var categories = data[i].categories;
+                console.log(data[i]);
+                console.log("i is " + i);
+                htmlString += '<div>';
+                htmlString += '<p>' + title + '</p>' + '<p>' + date + '</p>' + '<p>' + price + '</p>' + '<p>' + categories + '</p>';
+                htmlString += '</p>';
+                // }
+            }
+            tableInsert.html(htmlString);
+            // end
+        });
+    }
+
+    loadData();
+    $('#refresh').click(loadData);
+})();
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>
