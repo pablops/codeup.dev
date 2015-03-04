@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Blog</title>
+    <title>My Blog About preTags</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -10,12 +10,56 @@
 
 
     <link rel="stylesheet" type="text/css" href="/cleanBlogBootstrap.css"></style>
+    <style>
+        body {
+            background-color: green;
+            color: white;
+        }
+        img {
+            height: 50%;
+            width: 50%;
+        }
+    </style>
 </head>
 
 <body>
+<!-- Single button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    btn1 <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="www.google.com">ggl</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a href="www.google.com"></a></li>
+  </ul>
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    btn2 <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="#">BTN 2</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    btn3 <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="#">BTN</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
 
-<h1>My Blog</h1>
-<button id='refresh'>refresh</button>
+<h1>My Blog About preTags</h1>
+<h2>(and divs)</h2>
+<button id='refresh'>rfrsh</button>
 <div id="posts">
 
 </div>
@@ -43,9 +87,9 @@
                 var categories = data[i].categories;
                 console.log(data[i]);
                 console.log("i is " + i);
-                htmlString += '<div>';
-                htmlString += '<p>' + title + '</p>' + '<p>' + date + '</p>' + '<p>' + price + '</p>' + '<p>' + categories + '</p>';
-                htmlString += '</p>';
+                htmlString += '<article>';
+                htmlString += '<p>' + title + '</p>' + '<pre>' + date + '</pre>' + '<img src="img/blinky.jpg" >' + '<p>' + price + '</p>' + '<p>' + categories + '</p>' 
+                htmlString += '</article>';
                 // }
             }
             tableInsert.html(htmlString);

@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title>Weather or Knots</title>
+	<style>
+		h2{
+			text-align: center;
+		}
+		#weather {
+			background-image: url('http://www.myblueskydentistry.com/ESW/Images/blue_sky.jpg');
+			width: 640px;
+			height: 300px;
+		}
+		.boxes {
+			float: left;
+			opacity: 0.8;
+			text-align: center;
+			padding-right: 25px;
+			padding-top: 10px;
+			margin: 20px;
+		}
+		#map-canvas{
+			height: 300px;
+			width: 640px;
+		}
+	</style>
+</head>
+<body>
+	<h2>Weather Forecast</h2>
+	<div id="weather"></div>
+	<div id="map-canvas"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- MAPS API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEGy4XocZnbiU5FBX95HPA-qbSTO9UuQI"></script>
+<!-- MAPS API -->
+
+
+<script>
+   // MAP OPTIONS
+	var mapOptions = {
+          zoom: 12,
+          center: { lat: 29.4167, lng: -98.5000},
+          mapTypeId: google.maps.MapTypeId.HYBRID,
+          heading: 600,
+    	  tilt: 90
+        };
+    var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+    var markerLoc = { lat: 29.4167, lng: -98.5000 };
+    var marker = new google.maps.Marker({
+      	position: markerLoc,
+      	map: map,
+    });
+// MAP OPTIONS
+
+
+(function() {
+    var displayWeather = $('#weather'),
+    weatherHtml = '';
+
+    var weather = $.ajax('http://api.openweathermap.org/data/2.5/forecast/daily?lat=29.423017&lon=-98.48527&cnt=3&mode=json');
+
+    weather.done(function(data) {
+    	console.log(data);
+    	console.log(data.list);
+    	data = data.list;
+    	console.log('now data is ' + data + 'with length ' + data.length);
+    	for(var i = 0; i < data.length; i++){
+	        console.log('loop has begun');
+	        var currentTemp = '<pre>Average Temp: ' + parseInt((data[i].temp.day - 273.15) * 1.8 + 32) + "°F" + '</pre>';
+	        console.log(currentTemp);
+	        var icon = '<img src="http://openweathermap.org/img/w/' + data[i].weather[0].icon + '.png">';
+	        var windSpeed = '<pre>Wind Speed: ' + data[i].speed + 'mph' + '</pre>';
+	        console.log(windSpeed);
+	        var pressure = '<pre>Pressure: ' + data[i].pressure + 'mb' + '</pre>';
+	        weatherHtml += '<div class="boxes">' + currentTemp + windSpeed + icon + pressure + '</div>';
+	    }
+	    displayWeather.html(weatherHtml);
+    });
+})();
+
+
+</script>
+</body>
+</html>
+
