@@ -4,22 +4,28 @@
 	<style>
 		h2{
 			text-align: center;
+			font-family: Georgia;
+			font-weight: bold;
 		}
 		#weather {
 			background-image: url('http://www.myblueskydentistry.com/ESW/Images/blue_sky.jpg');
-			width: 640px;
-			height: 300px;
+			width: 740px;
+			height: 320px;
 		}
 		.boxes {
 			float: left;
-			opacity: 0.8;
+			opacity: 0.9;
 			text-align: center;
-			padding-right: 25px;
+			padding-right: 20px;
 			padding-top: 10px;
 			margin: 20px;
+			border: solid;
+			border-color: navy;
+			background-color: white;
+			border-radius: 25px;
 		}
 		#map-canvas{
-			height: 300px;
+			height: 280px;
 			width: 640px;
 		}
 	</style>
@@ -47,15 +53,52 @@
     var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
     var markerLoc = { lat: 29.4167, lng: -98.5000 };
     var marker = new google.maps.Marker({
-      	position: markerLoc,
-      	map: map,
+      	position: mapOptions.center,
+      	draggable: true,
+      	animation: google.maps.Animation.DROP,
+      	map: map
     });
 // MAP OPTIONS
+
+// Get LONG LAT of marker
+google.maps.event.addListener(marker, 'dragend', function (event){
+	console.log(this.getPosition());
+	weather = $.ajax('http://api.openweathermap.org/data/2.5/forecast/daily?lat=' + this.getPosition().lat() + '&lon=' + this.getPosition().lng() + '&cnt=3&mode=json');
+	weather.done(getWeatherInformation);
+});
+
+var weather = $('weather');
+
+function getWeatherInformation(data) {
+	console.log(data);
+	var weatherHtml = '';
+	// new addition
+	var displayWeather = $('#weather'),
+    weatherHtml = '';   
+     // new addition ends
+	var city = data.city.name;
+	weatherHtml += '<h2>' + city + '</h2>';
+
+	console.log(data.list);
+	data = data.list;
+	for(var i = 0; i < data.length; i++){
+	        console.log('loop has begun');
+	        var currentTemp = '<pre>Average Temp: ' + parseInt((data[i].temp.day - 273.15) * 1.8 + 32) + "°F" + '</pre>';
+	        console.log(currentTemp);
+	        var icon = '<img src="http://openweathermap.org/img/w/' + data[i].weather[0].icon + '.png">';
+	        var windSpeed = '<pre>Wind Speed: ' + data[i].speed + 'mph' + '</pre>';
+	        console.log(windSpeed);
+	        var pressure = '<pre>Pressure: ' + data[i].pressure + 'mb' + '</pre>';
+	        weatherHtml += '<div class="boxes">' + currentTemp + windSpeed + icon + pressure + '</div>';
+	    }
+	displayWeather.html(weatherHtml);
+
+}
 
 
 (function() {
     var displayWeather = $('#weather'),
-    weatherHtml = '';
+    weatherHtml = '';   
 
     var weather = $.ajax('http://api.openweathermap.org/data/2.5/forecast/daily?lat=29.423017&lon=-98.48527&cnt=3&mode=json');
 
