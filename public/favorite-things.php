@@ -1,5 +1,12 @@
 <?php 
-$favethings = ['pizza', 'sports', 'books', 'el internet', 'beer'];
+
+function pageController(){ 
+	$data = [];
+	$data['list'] = array('pizza', 'sports', 'books', 'el internet', 'beer');
+	return $data;
+}
+
+extract (pageController());
 
  ?>
 
@@ -14,7 +21,8 @@ $favethings = ['pizza', 'sports', 'books', 'el internet', 'beer'];
 			font-size: 130px;
 		}
 		li {
-			color:white;
+			text-align: left;
+			color:gray;
 			background-color:blue;
 			text-align: center;
 			font-size: 65px;
@@ -28,10 +36,10 @@ $favethings = ['pizza', 'sports', 'books', 'el internet', 'beer'];
  </head>
  <body>
  	<h1>my favorite things</h1>
- 	<?php foreach($favethings as $thing){ ?>
- 	<ul>
- 		<li><?php echo $thing ?></li>
- 	</ul>
- 	<?php } ?>
+	<? foreach($list as $item): ?>
+ 	<ol>
+ 		<li><?= $item; ?></li>
+ 	</ol>
+	<? endforeach; ?>
  </body>
  </html>
