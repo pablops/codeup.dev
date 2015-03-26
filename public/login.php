@@ -2,28 +2,26 @@
 require_once '../Auth.php';
 require_once '../Input.php';
 session_start();
-var_dump(session_id());
-var_dump($_POST);
+// var_dump(session_id());
+// var_dump($_POST);
 
 //$username = isset($_POST['username']) ? $_POST['username'] : '';
 //$password = isset($_POST['password']) ? $_POST['password'] : '';
 
-if(Input::has('username') && Input::has("password")) {
+if(Input::has('username') && Input::has('password')) {
 		// todo:
 		Auth::attempt(Input::get('username'), Input::get('password'));
 
-	if(Auth::check())
-	{
+	if(Auth::check()) {
 		header('Location: authorized.php');
 	}
 	 else { 
-		echo "Username or Passweak is weak(Wikileaks)";
+		echo "Username or Password is incorrect";
 		var_dump(Input::get('password'));
 
 	}
 }
-else 
-{
+else {
 	echo "Input Information\n";
 } 
 

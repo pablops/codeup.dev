@@ -17,16 +17,16 @@
     $other = $_POST['other'];
 
     $dbc = mysqli_connect("localhost", "root", "", "aliendatabase")
-        or die('Error connecting to MySQL server.');
+        or die('Error connecting to MySQL server. ');
 
-    $query = "INSERT INTO aliens_abduction (first_name, last_name, " . 
-        "when_it_happened, how_long, how_many, alien_description, " .
-        "what_they_did, fang_spotted, other, email) " .
-        "VALUES ('$first_name', '$last_name', '$when_it_happened, '$how_long', '$how_many', " . 
-        " '$alien_description', '$what_they_did', '$fang_spotted', '$other', '$email')" ; 
+    $query = "INSERT INTO aliens_abduction (
+        first_name, last_name, when_it_happened, how_long, how_many, alien_description, what_they_did, fang_spotted, other, email)
+        VALUES ('$first_name', '$last_name', '$when_it_happened', '$how_long', '$how_many',
+            '$alien_description', '$what_they_did', '$fang_spotted', '$other', '$email')";
+    var_dump($query); 
     
     $result = mysqli_query ($dbc, $query)
-        or die('Error querying database.');
+        or die('Error querying database-new.' . mysqli_error($dbc));
 
     mysqli_close($dbc);
 
