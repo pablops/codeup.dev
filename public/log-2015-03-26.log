@@ -40,3 +40,8 @@
 [2015/03/26 15:03:28]: [INFO]: [User bestguest logged in.]
 [2015/03/26 15:06:33]: [INFO]: [User worstguest logged in.]
 [2015/03/26 15:11:19]: [INFO]: [User guest logged in.]
+[2015/03/26 15:16:17]: [ERROR]: [User ;alsdkfj failed to log in]
+[2015/03/26 15:16:22]: [ERROR]: [User guest failed to log in]
+[2015/03/26 15:16:27]: [INFO]: [User guest logged in.]
+[2015/03/26 15:20:09]: [ERROR]: [User  failed to log in]
+[2015/03/26 19:46:02]: [INFO]: [User bestguest logged in.]
