@@ -12,7 +12,9 @@ if(empty($_GET['counter'])){
 	$counter = $_GET['counter'];
 }
 
-var_dump($counter);
+
+
+// 
 if(empty($counter)){
 	$counter = 0;
     $parks = $dbc->query("SELECT * FROM national_parks LIMIT 4 OFFSET 0")->fetchAll(PDO::FETCH_ASSOC);
@@ -28,6 +30,10 @@ if(empty($counter)){
 <head>
 	<title>Naty Parqz</title>
 	<style>
+		body {
+			margin: 0 auto;
+			background-color: yellow;
+		}
 		td {
 			padding-right: 3px;
 			padding-left: 3px;
@@ -37,19 +43,17 @@ if(empty($counter)){
 		table {
 			margin-left: 190px;
 		}
-		#left{
-			margin-left: 290px;
-		}
 		h1 {
 			text-align: center;
+			color: red;
 		}
-		a{
-			float: center;
+		.buttons {
+			text-align: center;
 		}
 	</style>
 </head>
 <body>	
-	<? var_dump($_GET); ?>
+<!-- 	<? var_dump($_GET); ?> -->
 	<h1>National Parks</h1>
 	<table>
 			<td>NAME</td>
@@ -65,15 +69,23 @@ if(empty($counter)){
 		</tr>
 	<? } ?> 
 	</table>
-	<pre> <?= $counter; ?> </pre>
+	<pre>Page Views: <?= $counter; ?> </pre>
 	
-
-	<? if($counter > 3){ ?>
-		<a href="national_parks.php?q=pre&counter=<?= $counter + - 4 ?>;" id='left'>PREVIOUS</a>
-	<? } ?>
-	<? if($counter < 8){ ?>
-		<a href="national_parks.php?q=nxt&counter=<?= $counter + 4 ?>;" id='right'>NeXT</a>
-	<? } ?>
+	<div class='buttons'>
+		<? if($counter > 3){ ?>
+			<a href="national_parks.php?q=pre&counter=<?= $counter + - 4 ?>;" id='left'>PREVIOUS</a>
+		<? } ?>
+		<? if($counter < 8){ ?>
+			<a href="national_parks.php?q=nxt&counter=<?= $counter + 4 ?>;" id='right'>NeXT</a>
+		<? } ?>
+	</div>
+	<div class='buttons'>
+		<a href="national_parks.php?q=nxt&counter=<?=0?>;" id='one'>1</a>
+		<a href="national_parks.php?q=nxt&counter=<?=4?>;" id='two'>2</a>
+		<a href="national_parks.php?q=nxt&counter=<?=8?>;" id='three'>3</a>
+	</div>
+	<h3>This page is sponsored by</h3><a href="http://www.bing.com">BING</a>
+	<h3>Bing: Bing it!</h3>
 </body>
 </html>
 
