@@ -14,7 +14,7 @@ if(empty($_GET['page'])){
 
 if($_GET['page'] > 3){
 	$_GET['page'] = 1;
-} elseif (($_GET['page'] < 0) || !is_numeric($_GET['page'])){
+} elseif (($_GET['page'] < 1) || !is_numeric($_GET['page'])){
 	$_GET['page'] = 1;
 }
 

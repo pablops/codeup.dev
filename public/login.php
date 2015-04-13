@@ -1,5 +1,5 @@
 <?php
-require_once '../Auth.php';
+require_once '../VisibilityAuth.php';
 require_once '../Input.php';
 session_start();
 // var_dump(session_id());
@@ -9,7 +9,6 @@ session_start();
 //$password = isset($_POST['password']) ? $_POST['password'] : '';
 
 if(Input::has('username') && Input::has('password')) {
-		// todo:
 		Auth::attempt(Input::get('username'), Input::get('password'));
 
 	if(Auth::check()) {
