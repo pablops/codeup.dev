@@ -10,7 +10,7 @@ class Model {
     protected static $dbc;
     protected static $table;
 
-    public $attributes = array();
+    private $attributes = array();
     /*
      * Constructor
      */
@@ -66,28 +66,43 @@ class Model {
         // @TODO: After insert, add the id back to the attributes array so the object can properly reflect the id
         // @TODO: You will need to iterate through all the attributes to build the prepared query
         // @TODO: Use prepared statements to ensure data security
-    	if (isset($this->attributes)){
-    		$stmt = $this->dbc->prepare("SELECT * FROM " . static::$table . " WHERE id= :id");
-    		$stmt->bindValue(":table", $static->table, PDO::PARAM_STR);
-    		$stmt->bindValue(":id", $this->attributes["id"], PDO::PARAM_INT);
-    		
-    		$results = 	$stmt->execute();
+    	if (!empty($this->attributes)){
+    		// IF STATEMENT HERE THAT JUST UPDATES AND DOESN'T ASSIGN ID
+    		if(isset($this->attributes['id'])){
+    			echo "UPDATING\n";
+    			$stmt= self::$dbc->prepare("UPDATE " . static::$table . 
+    				" SET first_name = :first_name, 
+    					  last_name = :last_name,
+    					  email = :email,
+    					  birth_date = :birth_date
+    				   WHERE id=:id);");
+				
+				$stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
+    			$stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
+    			$stmt->bindValue(':email', $this->attributes['email'], PDO::PARAM_STR);
+    			$stmt->bindValue(':birth_date', $this->attributes['birth_date'], PDO::PARAM_STR);
+    			$stmt->bindValue(':id', $this->attributes['id'], PDO::PARAM_INT);
+    			$stmt->execute();
+					
+    		}
 
-    		if($results){
-    			foreach ($attributes as $key => $value) {
-    				if ($key != 'id'){
-    					$stmt = $this->dbc->prepare("UPDATE :table SET :key = :value");
-
-    					$stmt->bindValue(":table", $static->table, PDO::PARAM_STR);
-    					$stmt->bindValue(":key", $key, PDO::PARAM_STR);
-    					$stmt->bindValue(":value", $value, PDO::PARAM_INT);
-
-    					$stmt->execute();
-    				}
-    			}
     		} else {
+    			echo "running else statement\n";
+    			$stmt = self::$dbc->prepare("INSERT INTO " . static::$table . " (first_name, last_name, email, birth_date)
+    										VALUES (:first_name, :last_name, :email, cast(:birth_date as DATE));");
 
+    			$stmt->bindValue(':first_name', $this->attributes['first_name'], PDO::PARAM_STR);
+    			$stmt->bindValue(':last_name', $this->attributes['last_name'], PDO::PARAM_STR);
+    			$stmt->bindValue(':email', $this->attributes['email'], PDO::PARAM_STR);
+    			$stmt->bindValue(':birth_date', $this->attributes['birth_date'], PDO::PARAM_STR);
+    			$stmt->execute();
 
+    			$stmt = self::$dbc->prepare("SELECT id FROM " . static::$table . " WHERE email = :email;");
+    			$stmt->bindValue(":email", $this->attributes['email'], PDO::PARAM_STR);
+    			$stmt->execute();
+
+    			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+    			$this->attributes['id'] = $data['id'];
     		}
     	}
     }
