@@ -18,6 +18,5 @@ $query = 'DROP TABLE IF EXISTS national_parks;
     PRIMARY KEY (id)
 )';
 
-// Run query, if there are errors they will be thrown as PDOExceptions
 $dbc->exec($query);
 ?>

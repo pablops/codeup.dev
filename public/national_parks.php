@@ -5,6 +5,7 @@ define("DB_USER", "parks_user");
 define("DB_PASS", "codeup");
 
 require '../db_connect.php';
+require '../Input.php';
 
 // var_dump($_POST);
 
@@ -33,11 +34,11 @@ if(!empty($_POST)){
 	$query = 'INSERT INTO national_parks (name, description, location, date_established, area_in_acres) 
 			  VALUES (:name, :description, :location, :date_established, :area_in_acres)';
 	$stmt = $dbc->prepare($query);
-	$stmt->bindValue(':name',                $_POST['name'],        PDO::PARAM_STR);
-	$stmt->bindValue(':description',         $_POST['description'], PDO::PARAM_STR);
-	$stmt->bindValue(':location',            $_POST['location'],    PDO::PARAM_STR);
-	$stmt->bindValue(':date_established',    $_POST['established'], PDO::PARAM_STR);
-	$stmt->bindValue(':area_in_acres',       $_POST['area'],        PDO::PARAM_STR);
+	$stmt->bindValue(':name',                Input::getString('name'),        PDO::PARAM_STR);
+	$stmt->bindValue(':description',         Input::getString('description'), PDO::PARAM_STR);
+	$stmt->bindValue(':location',            Input::getString('location'),    PDO::PARAM_STR);
+	$stmt->bindValue(':date_established',    $_POST['established'],           PDO::PARAM_STR);
+	$stmt->bindValue(':area_in_acres',       Input::getNumber('area'),        PDO::PARAM_STR);
 	$stmt->execute();
 	}
 } 

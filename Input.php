@@ -27,6 +27,24 @@ class Input
         return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $default;
     }
 
+    public static function getString($key)
+    {
+        if (!is_string(self::get($key))) {
+            throw new Exception('$key is not a string.');
+        }
+        return self::get($key);
+    } 
+
+      public static function getNumber($key)
+    {
+        if (intval(self::get($key)) == 0){
+            throw new Exception('$key is not a number.');
+        }
+        return intval(self::get($key));
+    } 
+
+    // $this->firstName = trim($firstName);
+
     ///////////////////////////////////////////////////////////////////////////
     //                      DO NOT EDIT ANYTHING BELOW!!                     //
     // The Input class should not ever be instantiated, so we prevent the    //
