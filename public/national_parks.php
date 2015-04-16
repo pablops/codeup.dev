@@ -7,7 +7,6 @@ define("DB_PASS", "codeup");
 require '../db_connect.php';
 require '../Input.php';
 
-// var_dump($_POST);
 
 if(empty($_GET['page'])){
 	$_GET['page'] = 1;
@@ -19,18 +18,22 @@ if($_GET['page'] > 3){
 	$_GET['page'] = 1;
 }
 
+if(isset($_POST['remover'])){
+	$remove_park=$dbc->prepare("DELETE FROM national_parks WHERE id = :id");
+	$remove_park->bindValue(':id', $_POST['remover'], PDO::PARAM_INT);
+	$remove_park->execute();
+}
 
-
-if(!empty($_POST)){
+if(!empty($_POST) && !Input::has('remover')){
 	$query = 'INSERT INTO national_parks (name, description, location, date_established, area_in_acres) 
 			  VALUES (:name, :description, :location, :date_established, :area_in_acres)';
 	$stmt = $dbc->prepare($query);
 	try{ 
-		$stmt->bindValue(':name',                Input::getString('name'),        PDO::PARAM_STR);
-		$stmt->bindValue(':description',         Input::getString('description'), PDO::PARAM_STR);
-		$stmt->bindValue(':location',            Input::getString('location'),    PDO::PARAM_STR);
-		$stmt->bindValue(':date_established',    $_POST['established'],           PDO::PARAM_STR);
-		$stmt->bindValue(':area_in_acres',       Input::getNumber('area'),        PDO::PARAM_STR);	
+		$stmt->bindValue(':name',                Input::getString('name', 1, 29),                   PDO::PARAM_STR);
+		$stmt->bindValue(':description',         Input::getString('description', 1, 399),           PDO::PARAM_STR);
+		$stmt->bindValue(':location',            Input::getString('location', 1, 70),               PDO::PARAM_STR);
+		$stmt->bindValue(':date_established',    $_POST['established'],                             PDO::PARAM_STR);
+		$stmt->bindValue(':area_in_acres',       Input::getNumber('area', 0),                       PDO::PARAM_STR);	
 		$stmt->execute();	 
 	} catch (Exception $e) {
 		 echo $e->getMessage();
@@ -45,19 +48,21 @@ $parks->bindValue(':offset',$offset,PDO::PARAM_INT);
 
 $parks->execute();
 
+
 ?>
 
 <html>
 <head>
-	<title>Naty Parqz</title>
+	<title>N/\TION/\L P/\RKS</title>
 	<style>
 		body {
 			margin: 0 auto;
-			background-color: yellow;
+			background-color: #C0C0C0;
 		}
 		table {
 			float: none;
 			margin: 0 auto;
+			background-color: white;
 		}
 		td {
 
@@ -88,6 +93,25 @@ $parks->execute();
 		form{
 			text-align: center;
 		}
+		#submit{
+			background-color: #EEE;
+			border-radius:0;
+			border:1px solid #999;
+			color:#666;
+			font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+			font-size:11px;
+			font-weight:700;
+			padding:2px 6px;
+			height:28px
+		}
+		.title {
+			font-weight: bold;
+		}
+		.deletions{
+			border: none;
+			color: red;
+			background: white;
+		}
 
 	</style>
 </head>
@@ -98,11 +122,12 @@ $parks->execute();
 	</div>
 	<table>
 		<div id='titles'>
-			<td>NAME</td>
-			<td>LOCATION</td>
-			<td>DESCRIPTION</td>
-			<td>EST.</td>
-			<td>AREA</td>
+			<td class='title'>NAME</td>
+			<td class='title'>LOCATION</td>
+			<td class='title'>DESCRIPTION</td>
+			<td class='title'>EST.</td>
+			<td class='title'>AREA</td>
+			<td class='title'>DELETE</td>
 		</div>
 	<? foreach($parks as $park){ ?>
 		<tr>		 
@@ -111,6 +136,12 @@ $parks->execute();
 			<td><?= $park['description']; ?></td>
 			<td><?= $park['date_established']; ?></td>
 			<td><?= $park['area_in_acres']; ?></td>
+			<td>
+				<form method='post'>
+					<input type='hidden' name="remover" value="<?=$park['id']?>">
+					<input type='submit' value="X" class='deletions'>
+				</form>
+			</td>
 		</tr>
 	<? } ?> 
 	</table>
@@ -131,16 +162,15 @@ $parks->execute();
 	</div>
 		<br>
 	<form action="national_parks.php" method="POST">
-  		<input type="text" name="name" placeholder="Name"><br>
-  		<input type="text" name="location" placeholder="Location"><br>
-  		<input type="text" name="description" placeholder="Description"><br>
-  		<input type="text" name="established" placeholder="Established"><br> 
-  		<input type="text" name="area" placeholder="Area"><br> 
+  		<input type="text" name="name" placeholder="Name" value="<?=Input::get('name')?>"><br>
+  		<input type="text" name="location" placeholder="Location" value="<?=Input::get('location')?>"><br>
+  		<input type="text" name="description" placeholder="Description" value="<?=Input::get('description')?>"><br>
+  		<input type="text" name="established" placeholder="Established" value="<?=Input::get('established')?>"><br> 
+  		<input type="text" name="area" placeholder="Area" value="<?=Input::get('area')?>"><br> 
   		<br>
-  		<input type="submit" value="Submit">
+  		<input type="submit" value="Submit" id="submit">
 	</form>
-	<h3>This page is sponsored by</h3><a href="http://www.bing.com">BING</a>
-	<h3>Bing: Bing it!</h3>
+	<h3>This page is sponsored by</h3><a href="http://www.bing.com">BING: Bing it!</a>
 </body>
 </html>
 

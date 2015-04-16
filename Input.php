@@ -21,24 +21,32 @@ class Input
      * @param mixed $default default value to return if key not found
      * @return mixed value passed in request
      */
-    public static function get($key, $default = null)
+    public static function get($key, $default=null)
     {
         // TODO: Fill in this function
         return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $default;
     }
 
-    public static function getString($key)
+    public static function getString($key, $min=null, $max=100000)
     {
+        // var_dump(self::get($key));
+        // strlen ( string $string )
         if (!is_string(self::get($key)) || empty(self::get($key))) {
             throw new Exception('Input error related to string.');
+        } if (strlen(self::get($key)) > $max || strlen(self::get($key)) < $min){
+            throw new LengthException('There is a length exception.');
         }
         return self::get($key);
     } 
 
-      public static function getNumber($key)
+    // If a number is less than $min or larger than $max, throw a RangeException
+
+      public static function getNumber($key, $min=null)
     {
         if (intval(self::get($key)) == 0){
             throw new Exception('Input error related to integer.');
+        } elseif (intval(self::get($key)) < $min){
+            throw new RangeException('number is out of range.');
         }
         return intval(self::get($key));
     } 
