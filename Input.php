@@ -29,8 +29,8 @@ class Input
 
     public static function getString($key)
     {
-        if (!is_string(self::get($key))) {
-            throw new Exception('$key is not a string.');
+        if (!is_string(self::get($key)) || empty(self::get($key))) {
+            throw new Exception('Input error related to string.');
         }
         return self::get($key);
     } 
@@ -38,7 +38,7 @@ class Input
       public static function getNumber($key)
     {
         if (intval(self::get($key)) == 0){
-            throw new Exception('$key is not a number.');
+            throw new Exception('Input error related to integer.');
         }
         return intval(self::get($key));
     } 

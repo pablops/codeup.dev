@@ -19,29 +19,23 @@ if($_GET['page'] > 3){
 	$_GET['page'] = 1;
 }
 
+
+
 if(!empty($_POST)){
-	if(empty($_POST['name'])){
-		echo "********************************ENTER A VALID NAME********************************";
-	} elseif(empty($_POST['description'])){
-		echo "********************************ENTER A VALID DESCRIPTION********************************";
-	} elseif(empty($_POST['location'])){
-		echo "********************************ENTER A VALID LOCATION********************************";
-	} elseif(empty($_POST['established'])){
-		echo "********************************ENTER A VALID DATE********************************";
-	} elseif(empty($_POST['area']) || !is_numeric($_POST['area'])){
-		echo "********************************ENTER A VALID AREA********************************";
-	} else{
 	$query = 'INSERT INTO national_parks (name, description, location, date_established, area_in_acres) 
 			  VALUES (:name, :description, :location, :date_established, :area_in_acres)';
 	$stmt = $dbc->prepare($query);
-	$stmt->bindValue(':name',                Input::getString('name'),        PDO::PARAM_STR);
-	$stmt->bindValue(':description',         Input::getString('description'), PDO::PARAM_STR);
-	$stmt->bindValue(':location',            Input::getString('location'),    PDO::PARAM_STR);
-	$stmt->bindValue(':date_established',    $_POST['established'],           PDO::PARAM_STR);
-	$stmt->bindValue(':area_in_acres',       Input::getNumber('area'),        PDO::PARAM_STR);
-	$stmt->execute();
+	try{ 
+		$stmt->bindValue(':name',                Input::getString('name'),        PDO::PARAM_STR);
+		$stmt->bindValue(':description',         Input::getString('description'), PDO::PARAM_STR);
+		$stmt->bindValue(':location',            Input::getString('location'),    PDO::PARAM_STR);
+		$stmt->bindValue(':date_established',    $_POST['established'],           PDO::PARAM_STR);
+		$stmt->bindValue(':area_in_acres',       Input::getNumber('area'),        PDO::PARAM_STR);	
+		$stmt->execute();	 
+	} catch (Exception $e) {
+		 echo $e->getMessage();
 	}
-} 
+}
 
 $offset = 4 * ($_GET['page'] - 1);
 
