@@ -30,7 +30,7 @@ class Auth{
         	var_dump($password);
         	$user = new Log();
         	$user->error("User $username failed to log in");
-        	// Log->info("User $username failed to log in!");    	s
+        	// Log->info("User $username failed to log in!");    	
         }
     }
 
