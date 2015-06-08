@@ -2,22 +2,16 @@
 
 
 $multicity = array(
-	$label = array("City", "Country", "Continent"),
-	$a     = array("City" => "Tokyo", "Country" => "Japan", "Continent" => "Asia"),
-	$b     = array("City" => "Mexico City", "Country" => "Mexico", "Continent" => "North America"),
-	$c     = array("City" => "New York City", "Country" => "USA", "Continent" => "North America"),
-	$d     = array("City" => "Mumbai", "Country" => "India", "Continent" => "Asia")
-
+	array("City", "Country", "Continent"),
+	array("City" => "Tokyo", "Country" => "Japan", "Continent" => "Asia"),
+	array("City" => "Mexico City", "Country" => "Mexico", "Continent" => "North America"),
+	array("City" => "New York City", "Country" => "USA", "Continent" => "North America"),
+	array("City" => "Mumbai", "Country" => "India", "Continent" => "Asia"),
+	array("City" => "Shanghai", "Country" => "China", "Continent" => "Asia"),
+	array("City" => "Shanghai", "Country" => "China", "Continent" => "Asia"),
+	array("City" => "Lagos", "Country" => "Nigeria", "Continent" => "Africa"),
+	array("City" => "Buenos Aires", "Country" => "Argentina", "Continent" => "South America"),
 	);
-
-
-// print_r ($multicity);
-
-// Tokyo, Japan, Asia; Mexico City, Mexico, North America; 
-// New York City, USA, North America; 
-// Mumbai, India, Asia; Seoul, Korea, Asia; 
-// Shanghai, China, Asia; Lagos, Nigeria, Africa; Buenos Aires, Argentina, South America; Cairo, Egypt, Africa; London, UK, Europe.
-
 
 ?>
 
@@ -33,9 +27,9 @@ $multicity = array(
 <body>
 	<table>
 		<tr>
-			<td><?= $label[0] ?></td>
-			<td><?= $label[1] ?></td>
-			<td><?= $label[2] ;?></td>
+			<td><?= $multicity[0][0] ?></td>
+			<td><?= $multicity[0][1] ?></td>
+			<td><?= $multicity[0][2] ;?></td>
 		</tr>
 		<? for($i=1; $i < count($multicity); $i++) { ?>
 		<tr>
